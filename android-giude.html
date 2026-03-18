@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Подключение и настройка через V2RayTun</title>
+
+  <!-- Open Graph — для кнопки "Посмотреть" в Telegram -->
+  <meta property="og:title" content="Подключение и настройка через V2RayTun">
+  <meta property="og:description" content="Пошаговая инструкция: скачайте V2RayTun, получите ссылку через Telegram-бота и настройте VPN на Android за 5 минут.">
+  <meta property="og:image" content="https://i.ibb.co/zhbpYJcw/Screenshot-20260305-102052-com-gbox-android-edit-54113807016596.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content=""><!-- заполни своим URL после публикации -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Подключение и настройка через V2RayTun">
+  <meta name="twitter:description" content="Пошаговая инструкция по настройке VPN на Android через V2RayTun и Telegram-бота.">
+  <meta name="twitter:image" content="https://i.ibb.co/zhbpYJcw/Screenshot-20260305-102052-com-gbox-android-edit-54113807016596.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --bg2: #13161e;
+      --bg3: #1a1e28;
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --accent: #4f8ef7;
+      --accent2: #7db3ff;
+      --text: #e8eaf0;
+      --text2: #8b90a0;
+      --text3: #5a5f70;
+      --step-num: #4f8ef7;
+      --warn: #f7c94f;
+      --warn-bg: rgba(247,201,79,0.08);
+      --success: #4fd17a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Geologica', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* Header */
+    header {
+      padding: 56px 0 48px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    h1 {
+      font-size: clamp(26px, 5vw, 38px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 540px;
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    .meta a {
+      color: var(--accent2);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .meta a:hover { text-decoration: underline; }
+
+    /* Summary block */
+    .summary {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 48px;
+      font-size: 14.5px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    .summary strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Section title */
+    .section-title {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 0; }
+
+    .step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 20px;
+      padding-bottom: 36px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .step:nth-child(1) { animation-delay: 0.05s; }
+    .step:nth-child(2) { animation-delay: 0.1s; }
+    .step:nth-child(3) { animation-delay: 0.15s; }
+    .step:nth-child(4) { animation-delay: 0.2s; }
+    .step:nth-child(5) { animation-delay: 0.25s; }
+    .step:nth-child(6) { animation-delay: 0.3s; }
+    .step:nth-child(7) { animation-delay: 0.35s; }
+    .step:nth-child(8) { animation-delay: 0.4s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    /* Vertical line */
+    .step:not(:last-child) .step-num::after {
+      content: '';
+      position: absolute;
+      top: 48px;
+      left: 15px;
+      width: 1px;
+      height: calc(100% - 12px);
+      background: linear-gradient(to bottom, rgba(79,142,247,0.3), rgba(79,142,247,0.05));
+    }
+
+    .step-num {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content { padding-top: 4px; }
+
+    .step-content h2 {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .step-content p {
+      font-size: 15px;
+      color: var(--text2);
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    .step-content p:last-child { margin-bottom: 0; }
+
+    /* Images */
+    .img-wrap {
+      margin: 16px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+    }
+
+    .img-wrap img {
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    /* Sub-steps */
+    .substeps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin: 16px 0;
+    }
+
+    .substep {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+
+    .substep-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 8px;
+    }
+
+    .substep p { color: var(--text2); font-size: 14.5px; margin-bottom: 10px; }
+    .substep p:last-child { margin-bottom: 0; }
+
+    /* Warning */
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid rgba(247,201,79,0.2);
+      border-left: 3px solid var(--warn);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 14.5px;
+      color: var(--text2);
+    }
+
+    .warning strong {
+      color: var(--warn);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Status indicators */
+    .status-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14.5px;
+      color: var(--text2);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot.blue { background: #4f8ef7; box-shadow: 0 0 8px rgba(79,142,247,0.6); }
+    .dot.green { background: var(--success); box-shadow: 0 0 8px rgba(79,209,122,0.6); }
+
+    /* Success block */
+    .success-block {
+      background: rgba(79,209,122,0.06);
+      border: 1px solid rgba(79,209,122,0.15);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 48px;
+      text-align: center;
+    }
+
+    .success-block .icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .success-block h3 {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--success);
+      margin-bottom: 6px;
+    }
+
+    .success-block p {
+      font-size: 14.5px;
+      color: var(--text2);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px 60px; }
+      header { padding: 36px 0 32px; }
+      .step { grid-template-columns: 36px 1fr; gap: 0 14px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">Android · VPN · V2RayTun</div>
+    <h1>Подключение и настройка через V2RayTun</h1>
+    <p class="subtitle">Максимально простая и понятная настройка для использования на Android устройствах</p>
+    <div class="meta">
+      <span>Автор: <a href="https://t.me/SLyubushin">Сергей Любушин</a></span>
+      <span>·</span>
+      <span>5 марта 2026</span>
+    </div>
+  </header>
+
+  <div class="summary">
+    <strong>Краткое содержание:</strong> скачайте приложение из Play Market, получите уникальную ссылку через Telegram-бота, добавьте её в V2RayTun — автоматически или из буфера обмена. Подтвердите разрешения, нажмите кнопку включения. Затем настройте правила для российских сервисов через пресет «Ru без VPN».
+  </div>
+
+  <div class="section-title">Пошаговая инструкция</div>
+
+  <div class="steps">
+
+    <!-- Step 1 -->
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h2>Скачиваем приложение V2RayTun</h2>
+        <p>Заходим в Play Market и устанавливаем приложение V2RayTun.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/zhbpYJcw/Screenshot-20260305-102052-com-gbox-android-edit-54113807016596.jpg" alt="V2RayTun в Play Market" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h2>Получаем ссылку в Telegram-боте</h2>
+        <p>Возвращаемся в Telegram-бота и нажимаем кнопку <strong style="color:var(--text)">"Получить доступ"</strong>.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/XfXSwQG1/IMG-20260309-205337.jpg" alt="Кнопка получить доступ" loading="lazy">
+        </div>
+        <p>После нажатия бот выдаст вашу уникальную ссылку.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/7Jrd057r/Screenshot-20260310-162134-org-telegram-messenger-edit-74277675984579.jpg" alt="Уникальная ссылка в боте" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h2>Добавляем ссылку в V2RayTun</h2>
+        <p>Есть несколько способов — выберите любой удобный.</p>
+
+        <div class="substeps">
+          <div class="substep">
+            <div class="substep-label">Способ 1 — автоматически</div>
+            <p>Нажмите кнопку <strong style="color:var(--text)">"Добавить в V2Ray Tun"</strong> в боте. Приложение откроется автоматически и вставит ссылку.</p>
+            <div class="img-wrap">
+              <img src="https://i.ibb.co/yBXTbjL8/Screenshot-20260314-202509.jpg" alt="Кнопка добавить в V2Ray Tun" loading="lazy">
+            </div>
+          </div>
+
+          <div class="substep">
+            <div class="substep-label">Способ 2 — из буфера обмена</div>
+            <p>Нажмите на ссылку — она скопируется в буфер обмена. Перейдите в V2RayTun, нажмите <strong style="color:var(--text)">"+"</strong>:</p>
+            <div class="img-wrap">
+              <img src="https://i.ibb.co/1G0MvTzP/Screenshot-20260305-112535.jpg" alt="Кнопка плюс" loading="lazy">
+            </div>
+            <p>Затем нажмите <strong style="color:var(--text)">"Импорт из буфера обмена"</strong>:</p>
+            <div class="img-wrap">
+              <img src="https://i.ibb.co/N2vZTDcC/Screenshot-20260305-112646.jpg" alt="Импорт из буфера обмена" loading="lazy">
+            </div>
+          </div>
+
+          <div class="substep">
+            <div class="substep-label">Способ 3 — через QR-код</div>
+            <p>В боте нажмите <strong style="color:var(--text)">"Получить QR-Код"</strong>:</p>
+            <div class="img-wrap">
+              <img src="https://i.ibb.co/VW1Y7qwY/Screenshot-20260318-094418.jpg" alt="Кнопка получить QR-код" loading="lazy">
+            </div>
+            <p>Скачайте или сделайте скриншот QR-кода:</p>
+            <div class="img-wrap">
+              <img src="https://i.ibb.co/KjjQX8hp/Screenshot-20260318-094431-org-telegram-messenger.jpg" alt="QR-код" loading="lazy">
+            </div>
+            <p>В V2RayTun нажмите <strong style="color:var(--text)">"+"</strong>, затем <strong style="color:var(--text)">"Импорт из QR-кода"</strong>:</p>
+            <div class="img-wrap">
+              <img src="https://i.ibb.co/9kpJbKfJ/Screenshot-20260318-094458.jpg" alt="Импорт из QR-кода" loading="lazy">
+            </div>
+            <p>Выберите сохранённое фото через <strong style="color:var(--text)">"Импорт из файла"</strong>:</p>
+            <div class="img-wrap">
+              <img src="https://i.ibb.co/WWqS5vYR/Screenshot-20260318-103131-com-v2raytun-android.jpg" alt="Импорт из файла" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h2>Разрешаем VPN-подключение</h2>
+        <p>При первом запуске приложение попросит разрешение на работу. Нажмите <strong style="color:var(--text)">"ОК"</strong>.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/67kxfwJm/Screenshot-20260305-112427-com-android-vpndialogs.jpg" alt="Разрешение VPN" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h2>Проверяем профиль</h2>
+        <p>Если всё сделано правильно — в приложении появится имя вашего профиля, а кнопка включения окрасится в синий цвет.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/V0wcW1g1/Screenshot-20260305-112920.jpg" alt="Профиль добавлен" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h2>Включаем VPN</h2>
+        <p>Нажмите кнопку включения.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/DfSPgfWv/Screenshot-20260305-112940.jpg" alt="Кнопка включения VPN" loading="lazy">
+        </div>
+        <div class="status-row">
+          <div class="status-item">
+            <div class="dot blue"></div>
+            <span>Синий цвет — VPN <strong style="color:var(--text)">выключен</strong></span>
+          </div>
+          <div class="status-item">
+            <div class="dot green"></div>
+            <span>Зелёный цвет + таймер — VPN <strong style="color:var(--success)">включён</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-content">
+        <h2>Настраиваем правила для российских сервисов</h2>
+        <p>Чтобы отечественные сервисы работали без VPN, нужно сделать несколько простых шагов.</p>
+
+        <p>Нажмите на шестерёнку внизу справа:</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/4n5mxpqt/Screenshot-20260307-102849-com-v2raytun-android-edit-180932396629729.jpg" alt="Шестерёнка настроек" loading="lazy">
+        </div>
+
+        <p>Перейдите в раздел <strong style="color:var(--text)">"Правила трафика"</strong>:</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/LXbn6F5b/Screenshot-20260307-102852-com-v2raytun-android-edit-180949399032274.jpg" alt="Правила трафика" loading="lazy">
+        </div>
+
+        <p>Включите тумблер <strong style="color:var(--text)">"Использовать пресет"</strong> и перейдите в раздел <strong style="color:var(--text)">"Правила от сообщества"</strong>:</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/Vcx2k7hz/Screenshot-20260307-102904-com-v2raytun-android-edit-180970080721485.jpg" alt="Использовать пресет" loading="lazy">
+        </div>
+
+        <p>Нажмите на <strong style="color:var(--text)">"Ru без VPN"</strong>:</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/xqWnst0s/Screenshot-20260307-102909-com-v2raytun-android-edit-180985254238771.jpg" alt="Ru без VPN" loading="lazy">
+        </div>
+
+        <p>Нажмите <strong style="color:var(--text)">"Применить"</strong>:</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/ycsxtxVv/Screenshot-20260307-102917-com-v2raytun-android-edit-180996771780954.jpg" alt="Применить" loading="lazy">
+        </div>
+
+        <div class="warning">
+          <strong>⚠ Важно</strong>
+          После применения необходимо выключить и снова включить VPN, чтобы изменения вступили в силу.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /steps -->
+
+  <div class="success-block">
+    <div class="icon">🎉</div>
+    <h3>Готово!</h3>
+    <p>Теперь вы можете пользоваться VPN-сервисом. Российские сайты будут открываться напрямую, остальной трафик — через VPN.</p>
+  </div>
+
+  <footer>
+    <span>Автор: <a href="https://t.me/SLyubushin">@SLyubushin</a></span>
+    <span>Оригинал на <a href="https://telegra.ph/Podklyuchenie-i-nastrojka-cherez-V2RayTun-03-14">Telegraph</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
