@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Настройка VPN на Mac (macOS)</title>
+  <meta property="og:title" content="Настройка VPN на Mac — V2RayTun">
+  <meta property="og:description" content="Пошаговая инструкция по установке и настройке V2RayTun на компьютере Mac.">
+  <meta property="og:image" content="https://i.ibb.co/zhbpYJcw/Screenshot-20260305-102052-com-gbox-android-edit-54113807016596.jpg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ryayar.github.io/guide/macos-guide.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="tag">macOS · Mac</div>
+    <h1>Настройка VPN на Mac</h1>
+    <p class="subtitle">Установите V2RayTun из Mac App Store и подключитесь через тот же Telegram-бот, что и на телефоне</p>
+    <a class="dl-btn" href="https://apps.apple.com/en/app/v2raytun/id6476628951" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l4-4 4 4M12 8v8"/></svg>
+      Скачать V2RayTun из Mac App Store
+    </a>
+  </header>
+
+  <div class="summary">
+    <strong>Коротко о процессе:</strong> установите приложение из Mac App Store, откройте его, получите ссылку в Telegram-боте и нажмите «Добавить в V2RayTun» — приложение добавит конфигурацию автоматически. Разрешите VPN-подключение и нажмите кнопку включения.
+  </div>
+
+  <div class="section-title">Пошаговая инструкция</div>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h2>Скачиваем V2RayTun из Mac App Store</h2>
+        <p>Нажмите кнопку «Скачать» выше или откройте <strong>App Store</strong> на Mac, найдите <strong>V2RayTun</strong> и нажмите «Загрузить».</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/zhbpYJcw/Screenshot-20260305-102052-com-gbox-android-edit-54113807016596.jpg" alt="V2RayTun в Mac App Store (заглушка)" loading="lazy">
+        </div>
+        <div class="tip">
+          <strong>Подсказка</strong>
+          Если приложение не отображается в российском Mac App Store — зайдите в App Store → кликните на своё имя внизу слева → «Посмотреть информацию» → «Страна/регион» → смените на «Казахстан».
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h2>Открываем приложение</h2>
+        <p>После установки откройте V2RayTun через <strong>Launchpad</strong> или папку «Программы» (Applications). Иконка приложения также появится в строке меню вверху экрана — это удобно для быстрого доступа.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/zhbpYJcw/Screenshot-20260305-102052-com-gbox-android-edit-54113807016596.jpg" alt="Открыть приложение (заглушка)" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h2>Получаем ссылку в Telegram-боте</h2>
+        <p>Откройте Telegram на Mac или телефоне. Зайдите в бота и нажмите <strong>«Получить доступ»</strong>.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/XfXSwQG1/IMG-20260309-205337.jpg" alt="Получить доступ" loading="lazy">
+        </div>
+        <p>Бот пришлёт вашу личную ссылку для подключения.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/7Jrd057r/Screenshot-20260310-162134-org-telegram-messenger-edit-74277675984579.jpg" alt="Личная ссылка" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h2>Добавляем конфигурацию</h2>
+        <p>Нажмите кнопку <strong>«Добавить в V2RayTun»</strong> под вашей ссылкой в боте.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/yBXTbjL8/Screenshot-20260314-202509.jpg" alt="Кнопка добавить" loading="lazy">
+        </div>
+        <p>Если Telegram открыт на Mac — V2RayTun запустится и добавит конфигурацию автоматически.</p>
+        <p>Если Telegram на телефоне — скопируйте ссылку, затем в V2RayTun на Mac нажмите <strong>«+»</strong> и выберите <strong>«Импорт из буфера обмена»</strong> (вставка работает по <strong>⌘ + V</strong>).</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/N2vZTDcC/Screenshot-20260305-112646.jpg" alt="Импорт из буфера (заглушка)" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h2>Разрешаем VPN-подключение</h2>
+        <p>macOS попросит подтвердить добавление VPN-конфигурации. Введите <strong>пароль от своего Mac</strong> (тот, что используете при входе в систему) и нажмите <strong>«Разрешить»</strong>.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/67kxfwJm/Screenshot-20260305-112427-com-android-vpndialogs.jpg" alt="Разрешение VPN macOS (заглушка)" loading="lazy">
+        </div>
+        <p>Этот запрос появляется только один раз при первой настройке.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h2>Включаем VPN</h2>
+        <p>Нажмите кнопку включения в главном окне приложения или кликните по иконке V2RayTun в строке меню вверху экрана.</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/DfSPgfWv/Screenshot-20260305-112940.jpg" alt="Включить VPN (заглушка)" loading="lazy">
+        </div>
+        <div class="status-row">
+          <div class="status-item"><div class="dot blue"></div><span>Синий — VPN <strong>выключен</strong></span></div>
+          <div class="status-item"><div class="dot green"></div><span>Зелёный + таймер — VPN <strong>работает</strong></span></div>
+        </div>
+        <div class="tip">
+          <strong>Подсказка</strong>
+          Иконка в строке меню Mac — самый быстрый способ включить и выключить VPN, не открывая главное окно.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-content">
+        <h2>Настраиваем обход российских сайтов</h2>
+        <p>Откройте настройки (шестерёнка), перейдите в <strong>«Правила трафика»</strong>, включите <strong>«Использовать пресет»</strong>:</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/Vcx2k7hz/Screenshot-20260307-102904-com-v2raytun-android-edit-180970080721485.jpg" alt="Включить пресет (заглушка)" loading="lazy">
+        </div>
+        <p>Перейдите в <strong>«Правила от сообщества»</strong>, выберите <strong>«Ru без VPN»</strong> и нажмите <strong>«Применить»</strong>:</p>
+        <div class="img-wrap">
+          <img src="https://i.ibb.co/ycsxtxVv/Screenshot-20260307-102917-com-v2raytun-android-edit-180996771780954.jpg" alt="Применить правила (заглушка)" loading="lazy">
+        </div>
+        <div class="warning">
+          <strong>⚠ Важно</strong>
+          После нажатия «Применить» выключите VPN и включите снова, чтобы правила начали работать.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="success-block">
+    <div class="icon">🎉</div>
+    <h3>Всё готово!</h3>
+    <p>VPN работает на вашем Mac. Российские сайты открываются напрямую, остальной трафик идёт через VPN.</p>
+  </div>
+
+  <footer>
+    <span>Инструкция для macOS</span>
+    <span>Также доступно: <a href="windows-guide.html">Windows</a></span>
+  </footer>
+</div>
+</body>
+</html>
